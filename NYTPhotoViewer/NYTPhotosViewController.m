@@ -135,6 +135,13 @@ static const UIEdgeInsets NYTPhotosViewControllerCloseButtonImageInsets = {3, 0,
     if (!self.overlayWasHiddenBeforeTransition) {
         [self setOverlayViewHidden:NO animated:YES];
     }
+    
+    if (@available(iOS 11.0, *)) {
+        self.pageViewController.view.backgroundColor = [UIColor blackColor];
+        CGFloat height = self.view.frame.size.height - self.view.safeAreaInsets.top - self.view.safeAreaInsets.bottom;
+        self.view.frame = CGRectMake(0, self.view.safeAreaInsets.top, self.view.frame.size.width, height);
+        self.view.layoutIfNeeded;
+    }
 }
 
 - (void)viewWillLayoutSubviews {
